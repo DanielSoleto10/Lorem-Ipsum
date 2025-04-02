@@ -1,0 +1,69 @@
+<ion-content>
+  <div class="login-container">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
+
+              <div class="header-container">
+                <h1>Bienvenido de nuevo</h1>
+                <p>Inicia sesión en tu cuenta de Acme Inc</p>
+              </div>
+              
+              <ion-item>
+                <ion-label position="floating">Correo</ion-label>
+                <ion-input type="email" formControlName="correo" required></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input type="password" formControlName="password" required></ion-input>
+              </ion-item>
+
+              <div class="error-msg" *ngIf="errorMessage">
+                {{ errorMessage }}
+              </div>
+
+              <div class="forgot-password">
+                <a (click)="forgotPassword()">¿Olvidaste tu contraseña?</a>
+              </div>
+
+              <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">
+                Iniciar sesión
+              </ion-button>
+
+              <div class="divider">
+                <span>O continuar con</span>
+              </div>
+
+              <div class="social-buttons">
+                <ion-button (click)="loginWithProvider('apple')">
+                  <ion-icon name="logo-apple"></ion-icon>
+                </ion-button>
+                <ion-button (click)="loginWithProvider('google')">
+                  <ion-icon name="logo-google"></ion-icon>
+                </ion-button>
+                <ion-button (click)="loginWithProvider('facebook')">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </ion-button>
+              </div>
+
+              <div class="signup-link">
+                ¿No tienes una cuenta?
+                <a routerLink="/auth/register">Regístrate</a>
+              </div>
+
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    
+    <div class="terms-text">
+      Al hacer clic en continuar, aceptas nuestros
+      <a href="#">Términos de Servicio</a> y
+      <a href="#">Política de Privacidad</a>.
+    </div>
+  </div>
+</ion-content>

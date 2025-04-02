@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">Cerrar Sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Datos del Usuario</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="usuario">
+      <p><strong>UID:</strong> {{ usuario.uid }}</p>
+      <p><strong>Nombres:</strong> {{ usuario.nombres }}</p>
+      <p><strong>Apellidos:</strong> {{ usuario.apellidos }}</p>
+      <p><strong>Correo:</strong> {{ usuario.correo }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

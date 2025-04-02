@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Inicio Agricultor</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">Cerrar Sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Panel Agricultor</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item (click)="goToClima()">
+          <ion-label>Clima</ion-label>
+        </ion-item>
+        <ion-item (click)="goToVentas()">
+          <ion-label>Ventas</ion-label>
+        </ion-item>
+        <ion-item (click)="goToPesticidas()">
+          <ion-label>Pesticidas</ion-label>
+        </ion-item>
+        <ion-item (click)="goToConsejos()">
+          <ion-label>Consejos</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

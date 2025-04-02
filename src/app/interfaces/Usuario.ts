@@ -1,5 +1,7 @@
 export interface Usuario {
   uid: string;
-  nombre: string;
+  nombres: string;
+  apellidos: string;
   correo: string;
+  rol?: string; // si quisieras manejar roles
 }

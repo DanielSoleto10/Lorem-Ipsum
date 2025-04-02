@@ -1,0 +1,175 @@
+ion-content {
+  --background: #0e0e0e; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  padding: 1rem;
+}
+
+ion-card {
+  margin: 0 auto;
+  max-width: 480px;
+  width: 100%;
+  border-radius: 16px;
+  background-color: #1a1a1a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+ion-grid,
+ion-row {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.header-container {
+  text-align: center;
+  margin-bottom: 0.5rem;
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+  }
+  p {
+    color: #ccc;
+    margin: 0.3rem 0 0;
+    font-size: 0.95rem;
+  }
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: #444;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.password-item {
+  margin-bottom: 1.2rem;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 1.2rem;
+  
+  a {
+    color: #999;
+    font-size: 0.85rem;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.submit-btn {
+  display: flex;
+  margin: 0 auto;
+  --background: #0070f3;
+  --color: #ffffff;
+  --border-radius: 6px;
+  font-weight: 600;
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 1rem 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: #333;
+  }
+  span {
+    position: relative;
+    background: #1a1a1a;
+    color: #aaa;
+    font-size: 0.85rem;
+    padding: 0 1rem;
+    z-index: 1;
+  }
+}
+
+/* Botones sociales: cuadrados blancos con ícono negro */
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  ion-button {
+    --background: #fff;
+    --color: #000;
+    --border-radius: 8px;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.signup-link {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #ccc;
+
+  a {
+    color: #0070f3;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.terms-text {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #888;
+  
+  a {
+    color: #999;
+    text-decoration: underline;
+    &:hover {
+      color: #fff;
+    }
+  }
+}
