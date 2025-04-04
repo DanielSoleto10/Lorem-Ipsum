@@ -1,65 +1,72 @@
 <ion-content>
-  <div class="login-container">
+  <div class="background-image"></div>
+
+  <div class="login-wrapper">
     <ion-card>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
+        <div class="header-container">
+          <h1>Bienvenido de nuevo</h1>
+          <p>Inicia sesión en tu cuenta de Acme Inc</p>
+        </div>
 
-              <div class="header-container">
-                <h1>Bienvenido de nuevo</h1>
-                <p>Inicia sesión en tu cuenta de Acme Inc</p>
-              </div>
-              
-              <ion-item>
-                <ion-label position="floating">Correo</ion-label>
-                <ion-input type="email" formControlName="correo" required></ion-input>
-              </ion-item>
+        <ion-item lines="inset" class="input-item">
+          <ion-label position="floating">Correo</ion-label>
+          <ion-input
+            type="email"
+            formControlName="correo"
+            required
+            class="email-input"
+            autocomplete="email"
+            inputmode="email">
+          </ion-input>
+          <ion-note slot="error" *ngIf="loginForm.get('correo')?.touched && loginForm.get('correo')?.errors">
+            <span *ngIf="loginForm.get('correo')?.hasError('required')">Correo es requerido</span>
+            <span *ngIf="loginForm.get('correo')?.hasError('email')">Formato de correo inválido</span>
+          </ion-note>
+        </ion-item>
 
-              <ion-item>
-                <ion-label position="floating">Contraseña</ion-label>
-                <ion-input type="password" formControlName="password" required></ion-input>
-              </ion-item>
+        <ion-item lines="inset" class="input-item">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input
+            type="password"
+            formControlName="password"
+            required
+            autocomplete="current-password">
+          </ion-input>
+          <ion-note slot="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors">
+            <span *ngIf="loginForm.get('password')?.hasError('required')">Contraseña es requerida</span>
+            <span *ngIf="loginForm.get('password')?.hasError('minlength')">Mínimo 6 caracteres</span>
+          </ion-note>
+        </ion-item>
 
-              <div class="error-msg" *ngIf="errorMessage">
-                {{ errorMessage }}
-              </div>
+        <div class="error-msg" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
 
-              <div class="forgot-password">
-                <a (click)="forgotPassword()">¿Olvidaste tu contraseña?</a>
-              </div>
+        <div class="forgot-password">
+          <a (click)="forgotPassword()">¿Olvidaste tu contraseña?</a>
+        </div>
 
-              <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">
-                Iniciar sesión
-              </ion-button>
+        <ion-button expand="block" type="submit" [disabled]="!loginForm.valid || isLoading">
+          <ion-spinner *ngIf="isLoading"></ion-spinner>
+          <span *ngIf="!isLoading">Iniciar sesión</span>
+        </ion-button>
 
-              <div class="divider">
-                <span>O continuar con</span>
-              </div>
+        <div class="divider">
+          <span>O continuar con</span>
+        </div>
 
-              <div class="social-buttons">
-                <ion-button (click)="loginWithProvider('apple')">
-                  <ion-icon name="logo-apple"></ion-icon>
-                </ion-button>
-                <ion-button (click)="loginWithProvider('google')">
-                  <ion-icon name="logo-google"></ion-icon>
-                </ion-button>
-                <ion-button (click)="loginWithProvider('facebook')">
-                  <ion-icon name="logo-facebook"></ion-icon>
-                </ion-button>
-              </div>
+        <div class="google-login-button" (click)="loginWithProvider('google')">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQExly8Xk3GWUOkmUGETvVobduKHck3ivnVA&s" alt="Google" />
+          <span>Iniciar sesión con Google</span>
+        </div>
 
-              <div class="signup-link">
-                ¿No tienes una cuenta?
-                <a routerLink="/auth/register">Regístrate</a>
-              </div>
-
-            </form>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+        <div class="signup-link">
+          ¿No tienes una cuenta? <a routerLink="/auth/register">Regístrate</a>
+        </div>
+      </form>
     </ion-card>
-    
+
     <div class="terms-text">
       Al hacer clic en continuar, aceptas nuestros
       <a href="#">Términos de Servicio</a> y
@@ -67,3 +74,5 @@
     </div>
   </div>
 </ion-content>
+<ion-spinner name="crescent" class="custom-spinner" *ngIf="isLoading"></ion-spinner>
+

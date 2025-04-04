@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, AlertController, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { RouterModule } from '@angular/router';
+
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
@@ -16,12 +17,14 @@ import { RouterModule } from '@angular/router';
 export class LoginPage {
   loginForm: FormGroup;
   errorMessage = '';
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private alertCtrl: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private firestore: Firestore
   ) {
     this.loginForm = this.fb.group({
       correo: ['', [Validators.required, Validators.email]],
@@ -31,16 +34,67 @@ export class LoginPage {
 
   async onSubmit() {
     if (this.loginForm.valid) {
-      const { correo, password } = this.loginForm.value;
+      this.isLoading = true;
+  
       try {
-        await this.authService.loginUser(correo, password);
-        console.log('Usuario autenticado correctamente');
-        // Redirigir según tu lógica, aquí a /home-agricultor
-        this.navCtrl.navigateRoot('/home-agricultor');
+        const { correo, password } = this.loginForm.value;
+        const cred = await this.authService.loginUser(correo, password);
+        const uid = cred.user?.uid;
+        if (!uid) {
+          this.presentAlert('No se pudo obtener el UID del usuario.');
+          return;
+        }
+  
+        await this.redirigirSegunRol(uid);
+  
       } catch (error: any) {
-        console.error('Error al iniciar sesión:', error);
         this.errorMessage = this.parseFirebaseAuthError(error);
+      } finally {
+        this.isLoading = false;
       }
+    }
+  }
+  
+
+  async loginWithProvider(provider: string) {
+    if (provider === 'google') {
+      try {
+        const cred = await this.authService.loginWithGoogle();
+        const uid = cred.uid;
+
+        if (!uid) {
+          this.presentAlert('No se pudo obtener el UID del usuario.');
+          return;
+        }
+
+        await this.redirigirSegunRol(uid);
+      } catch (error) {
+        console.error('Error con Google:', error);
+        this.presentAlert('No se pudo iniciar sesión con Google.');
+      }
+    } else {
+      this.presentAlert(`Proveedor ${provider} no implementado.`);
+    }
+  }
+
+  async redirigirSegunRol(uid: string) {
+    const userDocRef = doc(this.firestore, `Usuarios/${uid}`);
+    const userSnap = await getDoc(userDocRef);
+    const userData = userSnap.data();
+
+    if (!userData || !userData['rol']) {
+      this.presentAlert('No se encontró información del rol del usuario.');
+      return;
+    }
+
+    const rol = userData['rol'];
+
+    if (rol === 'agricultor') {
+      this.navCtrl.navigateRoot('/home-agricultor');
+    } else if (rol === 'comprador') {
+      this.navCtrl.navigateRoot('/home-comprador');
+    } else {
+      this.presentAlert('Rol de usuario desconocido.');
     }
   }
 
@@ -56,10 +110,6 @@ export class LoginPage {
     } catch (error) {
       this.presentAlert('Error al enviar correo de recuperación');
     }
-  }
-
-  loginWithProvider(provider: string) {
-    console.log(`Login con ${provider} (no implementado)`);
   }
 
   private parseFirebaseAuthError(error: any): string {

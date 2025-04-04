@@ -1,107 +1,174 @@
 ion-content {
-  --background: #0e0e0e; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  margin: 0;
+  --background: transparent;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
 }
 
-.login-container {
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/icon/login-side-image.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.5);
+}
+
+.login-wrapper {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 900px;
-  padding: 1rem;
+  align-items: center;
+  padding: 2rem;
 }
 
 ion-card {
-  margin: 0 auto;
-  max-width: 480px;
   width: 100%;
-  border-radius: 16px;
-  background-color: #1a1a1a;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  max-width: 480px;
+  background-color: rgba(26, 26, 26, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
   color: #fff;
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
+  animation: fadeUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-ion-grid,
-ion-row {
-  height: 100%;
-  justify-content: center;
-  align-items: center;
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .form-container {
-  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  font-family: "Segoe UI", Roboto, sans-serif;
+  gap: 1.4rem;
 }
 
 .header-container {
   text-align: center;
-  margin-bottom: 0.5rem;
 
   h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
-    color: #ffffff;
     margin: 0;
   }
+
   p {
     color: #ccc;
-    margin: 0.3rem 0 0;
+    margin-top: 0.5rem;
     font-size: 0.95rem;
   }
 }
 
+
 ion-item {
   --background: transparent;
-  --border-color: #444;
+  --border-color: white;
+  --highlight-color-focused: white;
+  --padding-start: 0;
+  width: 300vw; 
+  max-width: 500px;
+  margin: 0 auto;
   color: #fff;
-  margin-bottom: 1rem;
 }
 
-.password-item {
-  margin-bottom: 1.2rem;
+input,
+ion-input {
+  --padding-start: 12px;
+  color: white;
+  font-size: 1rem;
 }
 
+.native-input {
+  border: 1px solid white !important;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.email-input {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* MENSAJES DE ERROR */
+ion-note[slot="error"] {
+  color: var(--ion-color-danger);
+  font-size: 0.8rem;
+}
+
+.error-msg {
+  color: var(--ion-color-danger);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+/* OLVIDASTE CONTRASEÑA */
 .forgot-password {
   text-align: right;
-  margin-bottom: 1.2rem;
-  
+
   a {
-    color: #999;
+    color: #f7f7f7;
     font-size: 0.85rem;
     text-decoration: none;
-    
+
     &:hover {
       text-decoration: underline;
     }
   }
 }
 
-.submit-btn {
+ion-button[type="submit"] {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.2rem;
+  width: auto;
+  max-width: 320px;
+  min-width: auto;
+  align-self: center;
+  text-transform: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+
   display: flex;
-  margin: 0 auto;
-  --background: #0070f3;
-  --color: #ffffff;
-  --border-radius: 6px;
-  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+
+  ion-spinner {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &:hover {
+    filter: brightness(0.96);
+    transform: scale(1.01);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+ion-button[type="submit"]::part(native) {
+  background-color: transparent !important;
+  color: rgb(10, 8, 8) !important;
 }
 
 .divider {
-  position: relative;
   text-align: center;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
+  position: relative;
 
   &::before {
     content: "";
@@ -112,64 +179,96 @@ ion-item {
     height: 1px;
     background: #333;
   }
+
   span {
+    background: rgba(26, 26, 26, 0.95);
     position: relative;
-    background: #1a1a1a;
-    color: #aaa;
-    font-size: 0.85rem;
     padding: 0 1rem;
-    z-index: 1;
+    font-size: 0.85rem;
+    color: #aaa;
   }
 }
 
-/* Botones sociales: cuadrados blancos con ícono negro */
-.social-buttons {
+/* BOTÓN GOOGLE */
+.google-login-button {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  width: auto;
+  margin-left: 2.5rem;
+  min-width: 260px;
+  max-width: 320px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 
-  ion-button {
-    --background: #fff;
-    --color: #000;
-    --border-radius: 8px;
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: inline-block;
+  }
 
-    ion-icon {
-      font-size: 1.2rem;
-    }
+  span {
+    color: black;
+    font-size: 0.95rem;
+  }
+
+  &:hover {
+    filter: brightness(0.96);
+    transform: scale(1.01);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
 }
 
+/* ENLACE DE REGISTRO */
 .signup-link {
   text-align: center;
   font-size: 0.85rem;
   color: #ccc;
 
   a {
-    color: #0070f3;
+    color: var(--auth-text-accent);
     text-decoration: none;
-    
+
     &:hover {
       text-decoration: underline;
     }
   }
 }
 
+/* TÉRMINOS Y POLÍTICAS */
 .terms-text {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   text-align: center;
   font-size: 0.75rem;
-  color: #888;
-  
+  color: #fcfcfc;
+
   a {
-    color: #999;
+    color: var(--auth-text-accent);
     text-decoration: underline;
+
     &:hover {
       color: #fff;
     }
   }
+}
+.custom-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  color: white;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
 }

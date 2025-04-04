@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 export class RegisterPage {
   registerForm: FormGroup;
   errorMessage = '';
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -30,30 +31,66 @@ export class RegisterPage {
       apellidos: ['', [Validators.required]],
       correo: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      rol: ['', [Validators.required]] 
     });
   }
 
   async onSubmit() {
     if (this.registerForm.valid) {
-      const { nombres, apellidos, correo, password } = this.registerForm.value;
+      this.isLoading = true;
+  
+      const { nombres, apellidos, correo, password, rol } = this.registerForm.value;
+  
       try {
-        // Crear usuario en Auth => uid
         const uid = await this.authService.registerUser(correo, password);
-
-        // Guardar en Firestore
+  
         await this.firebaseService.set('Usuarios', uid, {
           uid,
           nombres,
           apellidos,
-          correo
+          correo,
+          rol
         });
-
+  
         this.presentAlert('Usuario registrado exitosamente');
         this.navCtrl.navigateRoot('/auth/login');
       } catch (error: any) {
         console.error('Error al registrar usuario:', error);
         this.errorMessage = this.parseFirebaseAuthError(error);
+      } finally {
+        this.isLoading = false;
       }
+    }
+  }
+  
+
+  async registerWithGoogle() {
+    try {
+      const userData = await this.authService.loginWithGoogle();
+
+      const { uid, email, displayName } = userData;
+
+      // Separar nombre y apellido
+      const [nombres, ...rest] = displayName?.split(' ') || [''];
+      const apellidos = rest.join(' ') || '';
+
+     
+      const rol = 'agricultor';
+
+      await this.firebaseService.set('Usuarios', uid, {
+        uid,
+        nombres,
+        apellidos,
+        correo: email,
+        rol
+      });
+
+      this.presentAlert('Registro exitoso con Google');
+      this.navCtrl.navigateRoot('/home-agricultor'); 
+
+    } catch (error) {
+      console.error('Error con Google:', error);
+      this.presentAlert('Error al registrarse con Google');
     }
   }
 
@@ -61,14 +98,14 @@ export class RegisterPage {
     if (error && error.code) {
       switch (error.code) {
         case 'auth/email-already-in-use':
-          return 'El correo ya está en uso. Intenta recuperar tu contraseña o usa otro.';
+          return 'El correo ya está en uso.';
         case 'auth/invalid-email':
           return 'Correo inválido.';
         default:
-          return 'Error al registrar usuario: ' + error.code;
+          return 'Error: ' + error.code;
       }
     }
-    return 'Error desconocido al registrar.';
+    return 'Error desconocido';
   }
 
   private async presentAlert(message: string) {

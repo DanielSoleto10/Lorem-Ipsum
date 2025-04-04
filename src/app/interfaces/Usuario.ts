@@ -3,5 +3,5 @@ export interface Usuario {
   nombres: string;
   apellidos: string;
   correo: string;
-  rol?: string; // si quisieras manejar roles
+  rol: string; 
 }

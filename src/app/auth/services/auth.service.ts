@@ -4,37 +4,44 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
-  signOut
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  UserCredential
 } from '@angular/fire/auth';
-import { FirebaseService } from 'src/app/data/firebase.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private auth: Auth,
-    private firebaseService: FirebaseService
-  ) {}
+  constructor(private auth: Auth) {}
 
-  // Crear usuario en Auth, devolver uid
   async registerUser(correo: string, password: string): Promise<string> {
     const userCredential = await createUserWithEmailAndPassword(this.auth, correo, password);
     return userCredential.user.uid;
   }
 
-  // Iniciar sesión
-  async loginUser(correo: string, password: string): Promise<void> {
-    await signInWithEmailAndPassword(this.auth, correo, password);
+  async loginUser(correo: string, password: string): Promise<UserCredential> {
+    return await signInWithEmailAndPassword(this.auth, correo, password);
   }
 
-  // Reset password
   async resetPassword(correo: string): Promise<void> {
     await sendPasswordResetEmail(this.auth, correo);
   }
 
-  // Cerrar sesión
   async logout(): Promise<void> {
     return signOut(this.auth);
+  }
+
+  async loginWithGoogle(): Promise<{ uid: string; email: string; displayName: string }> {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(this.auth, provider);
+    const user = result.user;
+
+    return {
+      uid: user.uid,
+      email: user.email || '',
+      displayName: user.displayName || ''
+    };
   }
 }
