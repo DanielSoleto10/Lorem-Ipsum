@@ -1,0 +1,31 @@
+.footer-bar {
+  background-color: #2fca53; /* verde oscuro tipo naturaleza */
+  color: white;
+
+  .footer-icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem 0;
+
+    .footer-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+
+      ion-icon {
+        font-size: 24px;
+        background-color: white;
+        color: #06eb3c;
+        border-radius: 50%;
+        padding: 10px;
+        margin-bottom: 4px;
+      }
+
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+}

@@ -3,13 +3,14 @@ import { IonicModule, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../auth/services/auth.service';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from 'src/app/shared/layout/footer.component';
 
 @Component({
   selector: 'app-home-agricultor',
   templateUrl: './home-agricultor.page.html',
   styleUrls: ['./home-agricultor.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, RouterModule],
+  imports: [IonicModule, CommonModule, RouterModule, FooterComponent], // AÑADIDO
 })
 export class HomeAgricultorPage {
   constructor(

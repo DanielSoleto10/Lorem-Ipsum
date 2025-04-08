@@ -1,21 +1,29 @@
 ion-header {
-    --background: #2ecc71; /* color de fondo del header */
-    --color: #fff;        /* color del texto del header */
-  }
-  
-  ion-toolbar {
-    --background: #2ecc71;
-  }
-  
-  ion-content {
-    --background: #f9f9f9; /* fondo claro */
-  }
-  
-  .content-container {
-    margin: 1rem;
-  }
-  
-  ion-card {
-    margin: 1rem;
-  }
-  
+  --background: #2ecc71; // verde (color naturaleza)
+  --color: #fff;         // texto blanco
+}
+
+ion-toolbar {
+  --background: #2ecc71; // mantiene el color en toda la barra
+}
+
+ion-content {
+  --background: #f9f9f9; // fondo claro del contenido
+}
+
+.content-container {
+  margin: 1rem; // margen alrededor del contenido
+}
+
+ion-card {
+  margin: 1rem;
+}
+
+:host {
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3); 
+}

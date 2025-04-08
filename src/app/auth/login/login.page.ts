@@ -4,7 +4,7 @@ import { IonicModule, AlertController, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { RouterModule } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 
 @Component({
@@ -12,13 +12,13 @@ import { Firestore, doc, getDoc } from '@angular/fire/firestore';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [IonicModule, CommonModule, ReactiveFormsModule, RouterModule, FormsModule],
 })
 export class LoginPage {
   loginForm: FormGroup;
   errorMessage = '';
   isLoading = false;
-
+  selectedPet: string ='';
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -137,3 +137,4 @@ export class LoginPage {
     await alert.present();
   }
 }
+
