@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Clima</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <ion-button expand="block" (click)="obtenerClima('Tarija')">Tarija</ion-button>
+    <ion-button expand="block" (click)="obtenerClima('La Paz')">La Paz</ion-button>
+  
+    <ion-card *ngIf="clima">
+      <ion-card-header>
+        <ion-card-title>{{ ciudadSeleccionada }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>🌡️ Temperatura: {{ clima.main.temp }} °C</p>
+        <p>💧 Humedad: {{ clima.main.humidity }}%</p>
+        <p>💨 Viento: {{ clima.wind.speed }} m/s</p>
+        <p>🌥️ {{ clima.weather[0].description }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+  

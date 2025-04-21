@@ -26,6 +26,10 @@ export const routes: Routes = [
       import('src/app/auth/usuarios/perfil/perfil.routes').then(m => m.perfilRoutes)
   },
   {
+    path: 'usuarios/agricultor/clima',
+    loadComponent: () => import('./auth/usuarios/agricultor/clima/clima.page').then(m => m.ClimaPage)
+  },
+  {
     path: '**',
     redirectTo: 'auth/login'
   }

@@ -11,6 +11,8 @@ import { environment } from './environments/environment';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 
+import { provideHttpClient } from '@angular/common/http'; // ✅ NUEVO
+
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(IonicModule.forRoot()),
@@ -18,5 +20,6 @@ bootstrapApplication(AppComponent, {
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideRouter(routes),
+    provideHttpClient(), // ✅ NUEVO
   ],
 });
