@@ -1,0 +1,20 @@
+<ion-card class="card-pronostico-dias" *ngIf="pronostico.length > 1">
+    <ion-card-header>
+      <ion-card-title>PRONÓSTICO DE 5 DÍAS</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <div class="dias-grid">
+        <div class="hora-item" *ngFor="let item of horasHoy">
+            <div class="dia-nombre">
+                {{ capitalizarPrimera((dia.fecha | date:'EEEE':'':'es') ?? '') }}
+            </div>              
+          <p>🌡️ Máx: {{ obtenerMaxTemp(dia.datos) }}°</p>
+          <p>🌡️ Mín: {{ obtenerMinTemp(dia.datos) }}°</p>
+          <p>💧 Humedad: {{ obtenerPromedioHumedad(dia.datos) }}%</p>
+          <p>☁️ Nubes: {{ dia.datos[0].clouds.all }}%</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  

@@ -1,23 +1,57 @@
-<ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>Clima</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content class="ion-padding">
-    <ion-button expand="block" (click)="obtenerClima('Tarija')">Tarija</ion-button>
-    <ion-button expand="block" (click)="obtenerClima('La Paz')">La Paz</ion-button>
-  
-    <ion-card *ngIf="clima">
+<ion-content class="ion-padding scroll-content">
+
+  <div class="clima-container">
+
+    <!-- 🔵 PRONÓSTICO HOY -->
+    <ion-card class="card-pronostico-hoy" *ngIf="clima && pronostico.length">
       <ion-card-header>
-        <ion-card-title>{{ ciudadSeleccionada }}</ion-card-title>
+        <ion-card-title>PRONÓSTICO HOY</ion-card-title>
       </ion-card-header>
+
       <ion-card-content>
-        <p>🌡️ Temperatura: {{ clima.main.temp }} °C</p>
-        <p>💧 Humedad: {{ clima.main.humidity }}%</p>
-        <p>💨 Viento: {{ clima.wind.speed }} m/s</p>
-        <p>🌥️ {{ clima.weather[0].description }}</p>
+        <div class="info-ubicacion-left">{{ clima.name }}, {{ clima.sys.country }}</div>
+
+        <div class="info-detalle-box">
+          <p>🌡️ Temperatura Máxima: {{ clima.main.temp_max }}°</p>
+          <p>🌡️ Temperatura Mínima: {{ clima.main.temp_min }}°</p>
+          <p>💧 Humedad: {{ clima.main.humidity }}%</p>
+          <p>☁️ Nubes: {{ clima.clouds.all }}%</p>
+          <p>🕒 Hora de Actualización: {{ clima.dt * 1000 | date:'short' }}</p>
+        </div>
+
+        <div class="scroll-horas">
+          <div class="hora-item" *ngFor="let item of horasHoy">
+            <div class="hora-tiempo">{{ item.dt_txt | date:'shortTime' }}</div>
+            <div class="hora-temp">{{ item.main.temp }}°</div>
+            <div class="hora-desc">{{ item.weather[0].description }}</div>
+          </div>
+        </div>
       </ion-card-content>
     </ion-card>
-  </ion-content>
+
+    <!-- 🟣 PRONÓSTICO DE 5 DÍAS -->
+    <ion-card class="card-pronostico-dias" *ngIf="pronostico.length > 1">
+      <ion-card-header>
+        <ion-card-title>PRONÓSTICO DE 5 DÍAS</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="dias-scroll">
+          <div class="dia-box" *ngFor="let dia of pronostico.slice(1)" (click)="verDetalleDia(dia)">
+
+            <div class="dia-nombre">
+              {{ capitalizarPrimera((dia.fecha | date:'EEEE':'':'es') ?? '') }}
+            </div>
+            <p>🌡️ Máx: {{ obtenerMaxTemp(dia.datos) }}°</p>
+            <p>🌡️ Mín: {{ obtenerMinTemp(dia.datos) }}°</p>
+            <p>💧 Humedad: {{ obtenerPromedioHumedad(dia.datos) }}%</p>
+            <p>☁️ Nubes: {{ dia.datos[0].clouds.all }}%</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
   
+</ion-content>
+<app-footer></app-footer>

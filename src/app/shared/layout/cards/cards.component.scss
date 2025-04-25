@@ -1,0 +1,60 @@
+.card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 1rem;
+  }
+  
+  .card-horizontal {
+    --background: transparent; // importante para Ionic
+    background: transparent;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
+  
+    .card-container {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      gap: 16px;
+      background: #d7f5dc; // ✅ color agrícola unificado y atractivo
+      border-radius: 12px;
+      transition: transform 0.2s ease;
+    }
+  
+    &:hover .card-container {
+      transform: scale(1.02); // pequeño zoom al pasar el mouse
+    }
+  
+    .card-img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 12px;
+      background-color: #ffffff;
+      padding: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    .card-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  
+      h2 {
+        margin: 0;
+        font-size: 18px;
+        color: #2c3e50;
+        font-weight: 600;
+      }
+  
+      p {
+        margin: 4px 0 0;
+        font-size: 14px;
+        color: #4d4d4d;
+      }
+    }
+  }
+  

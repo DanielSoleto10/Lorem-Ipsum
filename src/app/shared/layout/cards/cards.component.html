@@ -1,0 +1,12 @@
+<div class="card-grid">
+    <ion-card *ngFor="let card of cards" [routerLink]="card.path" class="card-horizontal">
+      <div class="card-container">
+        <img [src]="card.image" alt="{{ card.title }}" class="card-img" />
+        <div class="card-text">
+          <h2>{{ card.title }}</h2>
+          <p>{{ card.subtitle }}</p>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+  

@@ -1,9 +1,98 @@
-ion-header {
-  --background: #e67e22;
-  --color: #fff;
+.perfil-content {
+  --background: #2ecc71;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-ion-content {
-  --background: #ffffff;
-  padding: 1rem;
+.perfil-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  margin: 2rem auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.perfil-foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.perfil-nombre {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin: 0.5rem 0 0;
+}
+
+.perfil-rol {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 1.5rem;
+}
+
+.perfil-dato {
+  text-align: left;
+  margin-bottom: 1.5rem;
+
+  label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+  }
+
+  p {
+    font-size: 14px;
+    color: #666;
+    margin: 0.3rem 0 0;
+  }
+}
+
+.perfil-botones {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  .editar {
+    background-color: #00c851;
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #00b44b;
+    }
+  }
+
+  .cerrar {
+    background-color: #eafff1;
+    color: #00c851;
+    padding: 0.6rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #d6fbe7;
+    }
+  }
+}
+:host {
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3); 
 }

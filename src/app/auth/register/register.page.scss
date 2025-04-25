@@ -167,3 +167,11 @@ ion-button.submit-btn::part(native) {
   height: 40px;
   pointer-events: none;
 }
+:host {
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3); 
+}

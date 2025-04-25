@@ -10,6 +10,7 @@ import {
   addDoc,
   deleteDoc
 } from '@angular/fire/firestore';
+import { getDoc } from '@firebase/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -41,5 +42,11 @@ export class FirebaseService {
   async delete(path: string, id: string): Promise<void> {
     const docRef = doc(this.firestore, path, id);
     await deleteDoc(docRef);
+  }
+
+  async getOnce<T>(path: string, id: string): Promise<T | undefined> {
+    const docRef = doc(this.firestore, path, id);
+    const docSnap = await getDoc(docRef);
+    return docSnap.exists() ? (docSnap.data() as T) : undefined;
   }
 }

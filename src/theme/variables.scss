@@ -1,68 +1,79 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
-/* Variables de color - Tema oscuro */
+/* =======================================
+   VARIABLES PERSONALIZADAS IONIC (THEMING)
+   ======================================= */
+
+/* 🌞 MODO CLARO (por defecto) */
 :root {
-    /* Colores base */
-    --ion-color-primary: #ffffff;
-    --ion-color-primary-rgb: 0, 112, 243;
-    --ion-color-primary-contrast: #ffffff;
-    --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #0063d6;
-    --ion-color-primary-tint: #1a7ef4;
-  
-    --ion-color-secondary: #7928ca;
-    --ion-color-secondary-rgb: 121, 40, 202;
-    --ion-color-secondary-contrast: #ffffff;
-    --ion-color-secondary-contrast-rgb: 255, 255, 255;
-    --ion-color-secondary-shade: #6a23b2;
-    --ion-color-secondary-tint: #863ecf;
-  
-    /* Colores de fondo */
-    --ion-color-dark: #1a1a1a;
-    --ion-color-dark-rgb: 26, 26, 26;
-    --ion-color-dark-contrast: #ffffff;
-    --ion-color-dark-contrast-rgb: 255, 255, 255;
-    --ion-color-dark-shade: #171717;
-    --ion-color-dark-tint: #313131;
-  
-    --ion-color-medium: #444;
-    --ion-color-medium-rgb: 68, 68, 68;
-    --ion-color-medium-contrast: #ffffff;
-    --ion-color-medium-contrast-rgb: 255, 255, 255;
-    --ion-color-medium-shade: #3c3c3c;
-    --ion-color-medium-tint: #575757;
-  
-    --ion-color-light: #f8f9fa;
-    --ion-color-light-rgb: 248, 249, 250;
-    --ion-color-light-contrast: #000000;
-    --ion-color-light-contrast-rgb: 0, 0, 0;
-    --ion-color-light-shade: #dadbdc;
-    --ion-color-light-tint: #f9fafb;
-  
-    /* Colores adicionales */
-    --ion-background-color: #0e0e0e;
+  /* Colores base */
+  --ion-color-primary: #2ecc71;
+  --ion-color-primary-rgb: 46, 204, 113;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #28b463;
+  --ion-color-primary-tint: #58d68d;
+
+  --ion-color-secondary: #3498db;
+  --ion-color-secondary-rgb: 52, 152, 219;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #2e86c1;
+  --ion-color-secondary-tint: #5dade2;
+
+  --ion-color-light: #f9f9f9;
+  --ion-color-light-rgb: 249, 249, 249;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+
+  --ion-background-color: #fafafa;         /* ✅ Fondo claro general */
+  --ion-text-color: #1e1e1e;               /* ✅ Texto negro suave */
+  --ion-border-color: #e0e0e0;
+
+  /* Variables personalizadas */
+  --auth-card-bg: #ffffff;
+  --auth-card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  --auth-card-radius: 16px;
+
+  --auth-text-primary: #1e1e1e;
+  --auth-text-secondary: #555;
+  --auth-text-accent: var(--ion-color-primary);
+
+  --auth-input-bg: #ffffff;
+  --auth-input-border: #ccc;
+
+  --auth-error-color: #e74c3c;
+  --auth-success-color: #27ae60;
+
+  --auth-social-btn-bg: #ffffff;
+  --auth-social-btn-color: #000000;
+
+  --auth-link-hover: #3498db;
+}
+
+/* 🌙 MODO OSCURO (activado automáticamente si el sistema lo tiene activo) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-color-primary: #58d68d;
+    --ion-color-primary-contrast: #000000;
+    --ion-color-secondary: #5dade2;
+    --ion-color-secondary-contrast: #000000;
+
+    --ion-color-light: #1e1e1e;
+    --ion-background-color: #121212;       /* 🌑 Fondo oscuro */
     --ion-text-color: #ffffff;
     --ion-border-color: #444;
-  }
-  
-  /* Variables personalizadas */
-  :root {
-    --auth-card-bg: var(--ion-color-dark);
-    --auth-card-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    --auth-card-radius: 16px;
-    
+
+    --auth-card-bg: #1e1e1e;
     --auth-text-primary: #ffffff;
-    --auth-text-secondary: #ccc;
-    --auth-text-accent: var(--ion-color-primary);
-    
+    --auth-text-secondary: #aaa;
     --auth-input-bg: transparent;
-    --auth-input-border: var(--ion-color-medium);
-    
-    --auth-error-color: #ff4444;
-    --auth-success-color: #00c851;
-    
-    --auth-social-btn-bg: #ffffff;
-    --auth-social-btn-color: #000000;
-    
-    --auth-link-hover: #1a7ef4;
+    --auth-input-border: #666;
+    --auth-link-hover: #58d68d;
   }
+}
+ion-app,
+ion-page,
+ion-content {
+  --background: #fafafa !important;
+  background: #fafafa !important;
+  color: #000000 !important;
+}

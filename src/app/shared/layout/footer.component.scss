@@ -1,30 +1,51 @@
 .footer-bar {
-  background-color: #2fca53; /* verde oscuro tipo naturaleza */
+  margin: 0;
+  padding: 0.75rem 0;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  background: linear-gradient(to right, #2ecc71, #27ae60);
   color: white;
+  box-shadow: none;
 
   .footer-icons {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
 
     .footer-icon {
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: white;
+      transition: transform 0.2s ease;
+      max-width: 90px; 
 
-      ion-icon {
-        font-size: 24px;
+      ion-icon,
+      img {
+        width: 48px;
+        height: 48px;
         background-color: white;
-        color: #06eb3c;
         border-radius: 50%;
         padding: 10px;
-        margin-bottom: 4px;
+        object-fit: contain;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        margin-bottom: 6px;
       }
 
       span {
-        font-size: 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: white;
+        text-align: center;
+      }
+
+      &:active ion-icon,
+      &:hover ion-icon,
+      &:active img,
+      &:hover img {
+        transform: scale(1.1);
+        background-color: #dfffe4;
       }
     }
   }

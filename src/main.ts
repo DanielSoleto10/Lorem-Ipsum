@@ -11,8 +11,10 @@ import { environment } from './environments/environment';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 
-import { provideHttpClient } from '@angular/common/http'; // ✅ NUEVO
-
+import { provideHttpClient } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(IonicModule.forRoot()),
@@ -20,6 +22,6 @@ bootstrapApplication(AppComponent, {
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideRouter(routes),
-    provideHttpClient(), // ✅ NUEVO
+    provideHttpClient(), 
   ],
 });

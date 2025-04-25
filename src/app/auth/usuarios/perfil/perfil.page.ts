@@ -3,17 +3,17 @@ import { IonicModule, NavController, AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { FirebaseService } from 'src/app/data/firebase.service';
-import { getAuth } from '@angular/fire/auth';
-import { getFirestore, doc, getDoc } from '@angular/fire/firestore';
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { RouterModule } from '@angular/router';
+import { getAuth } from '@angular/fire/auth';
+import { FooterComponent } from 'src/app/shared/layout/footer.component';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, RouterModule],
+  imports: [IonicModule, CommonModule, RouterModule , FooterComponent],
 })
 export class PerfilPage implements OnInit {
   usuario: Usuario | null = null;
@@ -31,22 +31,28 @@ export class PerfilPage implements OnInit {
 
   async cargarPerfil() {
     const auth = getAuth();
-    const currentUser = auth.currentUser;
-    if (!currentUser) {
-      return;
-    }
-    const uid = currentUser.uid;
+    const user = auth.currentUser;
+    if (!user) return;
 
-    const firestore = getFirestore();
-    const docRef = doc(firestore, 'Usuarios', uid);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      this.usuario = docSnap.data() as Usuario;
+    const data = await this.firebaseService.getOnce<Usuario>('Usuarios', user.uid);
+    if (data) {
+      this.usuario = data;
+    } else {
+      this.presentAlert('No se encontró el usuario en Firestore.');
     }
   }
 
   async logout() {
     await this.authService.logout();
     this.navCtrl.navigateRoot('/auth/login');
+  }
+
+  private async presentAlert(message: string) {
+    const alert = await this.alertCtrl.create({
+      header: 'Atención',
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }

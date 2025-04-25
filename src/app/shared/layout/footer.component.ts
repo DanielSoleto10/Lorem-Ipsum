@@ -12,20 +12,15 @@ import { Router } from '@angular/router';
 export class FooterComponent {
   constructor(private router: Router) {}
 
-  goToClima() {
-    console.log('Accediendo a Clima...');
-    this.router.navigateByUrl('/usuarios/agricultor/clima');
+  goToInicio() {
+    this.router.navigateByUrl('/home-agricultor');
   }
   
-  goToPesticidas() {
-    this.router.navigateByUrl('/usuarios/agricultor/pesticidas');
+  goToCuenta() {
+    this.router.navigateByUrl('/perfil'); 
   }
-
-  goToVentas() {
-    this.router.navigateByUrl('/usuarios/agricultor/ventas');
-  }
-
-  goToLuna() {
-    this.router.navigateByUrl('/usuarios/agricultor/luna');
+  
+  goToNotificaciones() {
+    this.router.navigateByUrl('/notificaciones'); 
   }
 }
