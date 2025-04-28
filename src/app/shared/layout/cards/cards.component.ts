@@ -19,6 +19,12 @@ export class CardsComponent {
           path: '/usuarios/agricultor/clima'
         },
         {
+          title: 'Luna',
+          subtitle: 'Posición lunar y fases',
+          image: 'assets/icon/luna.png',
+          path: '/usuarios/agricultor/luna'
+        },
+        {
           title: 'Pesticidas',
           subtitle: 'Control de plagas y productos',
           image: 'assets/icon/pesticidas.png',

@@ -1,0 +1,28 @@
+<ion-content class="ion-padding scroll-content">
+  <div class="clima-container">
+
+    <!-- 🔵 FASE LUNAR DE HOY -->
+    <ion-card class="card-pronostico-hoy" *ngIf="datosLuna">
+      <ion-card-header>
+        <ion-card-title>FASE LUNAR HOY</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="info-ubicacion-left">{{ ciudadActual }}</div>
+
+        <div class="info-detalle-box">
+          <p>🌕 Fase: {{ datosLuna.moon_phase }}</p>
+          <p>🔦 Iluminación: {{ datosLuna.moon_illumination }} %</p>
+          <p>📏 Distancia: {{ datosLuna.moon_distance }} km</p>
+          <p>📐 Altitud: {{ datosLuna.moon_altitude }} °</p>
+          <p>🗓️ Edad: {{ datosLuna.moon_age }} días</p>
+          <p>🛫 Sale: {{ datosLuna.moonrise }}</p>
+          <p>🛬 Se pone: {{ datosLuna.moonset }}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>
+
+<app-footer></app-footer>

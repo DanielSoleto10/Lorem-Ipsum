@@ -1,20 +1,32 @@
-<ion-card class="card-pronostico-dias" *ngIf="pronostico.length > 1">
-    <ion-card-header>
-      <ion-card-title>PRONÓSTICO DE 5 DÍAS</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <div class="dias-grid">
-        <div class="hora-item" *ngFor="let item of horasHoy">
-            <div class="dia-nombre">
-                {{ capitalizarPrimera((dia.fecha | date:'EEEE':'':'es') ?? '') }}
-            </div>              
-          <p>🌡️ Máx: {{ obtenerMaxTemp(dia.datos) }}°</p>
-          <p>🌡️ Mín: {{ obtenerMinTemp(dia.datos) }}°</p>
-          <p>💧 Humedad: {{ obtenerPromedioHumedad(dia.datos) }}%</p>
-          <p>☁️ Nubes: {{ dia.datos[0].clouds.all }}%</p>
-        </div>
-      </div>
-    </ion-card-content>
-  </ion-card>
-  
+<!-- 🔵 PRONÓSTICO HOY -->
+<ion-card class="card-pronostico-hoy" *ngIf="clima && horasHoy.length > 0">
+  <ion-card-header>
+    <ion-card-title>PRONÓSTICO HOY</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div *ngFor="let hora of horasHoy">
+      <p><strong>Hora:</strong> {{ hora.time | date:'shortTime' }}</p>
+      <p><strong>Temperatura:</strong> {{ hora.temp_c }} °C</p>
+      <p><strong>Condición:</strong> {{ hora.condition.text }}</p>
+      <p><strong>Humedad:</strong> {{ hora.humidity }} %</p>
+    </div>
+  </ion-card-content>
+</ion-card>
+
+<!-- 🟢 PRONÓSTICO DE 5 DÍAS -->
+<ion-card class="card-pronostico-dias" *ngIf="pronostico.length > 0">
+  <ion-card-header>
+    <ion-card-title>PRONÓSTICO DE 5 DÍAS</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item button detail="false" *ngFor="let dia of pronostico" (click)="verDetalleDia(dia)">
+        <ion-label>
+          <h3>{{ dia.fecha | date:'EEEE' | uppercase }}</h3>
+          <p>Máx: {{ obtenerMaxTemp(dia.datos) }}°C / Mín: {{ obtenerMinTemp(dia.datos) }}°C</p>
+          <p>Humedad: {{ obtenerPromedioHumedad(dia.datos) }}%</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

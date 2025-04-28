@@ -1,0 +1,92 @@
+/* ---------------  CONTENIDO PRINCIPAL  --------------- */
+
+ion-content.scroll-content {
+  --background: #f7fdf7;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 1rem;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* ---------------  CONTENEDOR  --------------- */
+
+.clima-container {
+  width: 100%;
+  max-width: 450px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;                /* separación uniforme */
+}
+
+/* ----------------------------------------------
+   TARJETA “FASE LUNAR HOY”
+---------------------------------------------- */
+
+.card-pronostico-hoy {
+  margin: 0 1rem;
+  padding: 1.2rem 1rem;
+  border-radius: 16px;
+  background: #e9f9e8;
+  border: 1px solid #cdeec9;
+  box-shadow: 0 2px 6px rgba(0, 100, 0, .06);
+  overflow: hidden;           /* evita esquinas mordidas */
+}
+
+/* Encabezado centrado */
+ion-card-header {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  padding: .75rem 0;
+}
+
+ion-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0a8a2a;
+  margin: 0;
+  text-align: center;
+}
+
+/* Ubicación */
+.info-ubicacion-left {
+  font-size: .875rem;
+  font-weight: 600;
+  color: #0c6c3a;
+  margin: 0 0 .8rem .2rem;
+}
+
+/* Detalle */
+.info-detalle-box {
+  background: #fff;
+  border: 1px solid #d9efd9;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: .875rem;
+  color: #2f6e2f;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
+}
+
+.info-detalle-box p {
+  margin: .35rem 0;
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+/* ----------------------------------------------
+   HOST (se mantiene para tu marco gris)
+---------------------------------------------- */
+
+:host {
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,.3);
+}

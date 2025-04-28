@@ -1,0 +1,17 @@
+<ion-card class="card-pronostico-hoy" *ngIf="datosLuna">
+  <ion-card-header>
+    <ion-card-title>FASE LUNAR HOY</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <div class="info-ubicacion-left">{{ ciudadActual }}</div>
+
+    <div class="info-detalle-box">
+      <p>🌕 Fase: {{ datosLuna.moon_phase }}</p>
+      <p>🔦 Iluminación: {{ datosLuna.moon_illumination }}%</p>
+      <p>🛫 Salida de la Luna: {{ datosLuna.moonrise }}</p>
+      <p>🛬 Puesta de la Luna: {{ datosLuna.moonset }}</p>
+      <p>🌍 Distancia: {{ datosLuna.moon_distance }} km</p>
+    </div>
+  </ion-card-content>
+</ion-card>

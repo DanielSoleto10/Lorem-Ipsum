@@ -11,7 +11,7 @@ registerLocaleData(localeEs);
   standalone: true,
   templateUrl: './clima.page.html',
   styleUrls: ['./clima.page.scss'],
-  imports: [IonicModule, CommonModule , FooterComponent]
+  imports: [IonicModule, CommonModule, FooterComponent]
 })
 export class ClimaPage implements OnInit {
   ciudadSeleccionada = '';
@@ -22,42 +22,29 @@ export class ClimaPage implements OnInit {
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit() {
+    this.actualizarDatos();
     setInterval(() => {
-      this.obtenerUbicacionYClima();
-    }, 60000); // se actualiza cada 60 segundos
+      this.actualizarDatos();
+    }, 300000); // cada 5 minutos
   }
 
   ionViewWillEnter() {
-    this.obtenerUbicacionYClima();
-    this.obtenerPronosticoPorUbicacion();
+    this.actualizarDatos();
   }
 
-  obtenerUbicacionYClima() {
+  actualizarDatos() {
     navigator.geolocation.getCurrentPosition(position => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
+
       this.weatherService.getWeatherByCoords(lat, lon).subscribe(data => {
         this.clima = data;
         this.ciudadSeleccionada = data.name;
       });
-    });
-  }
 
-  obtenerPronosticoPorUbicacion() {
-    navigator.geolocation.getCurrentPosition(position => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
       this.weatherService.getForecastByCoords(lat, lon).subscribe(data => {
         this.pronostico = this.agruparPorDia(data.list);
-
-        const hoy = new Date().toDateString();
-
-        const hoyItems = this.pronostico.find(p => {
-          const fecha = new Date(p.fecha);
-          return fecha.toDateString() === hoy;
-        });
-
-        this.horasHoy = hoyItems?.datos ?? [];
+        this.horasHoy = this.extraerHorasDeHoy(this.pronostico);
       });
     });
   }
@@ -80,6 +67,12 @@ export class ClimaPage implements OnInit {
     }));
   }
 
+  extraerHorasDeHoy(pronostico: any[]): any[] {
+    const hoy = new Date().toDateString();
+    const hoyItems = pronostico.find(p => new Date(p.fecha).toDateString() === hoy);
+    return hoyItems?.datos ?? [];
+  }
+
   capitalizarPrimera(texto: string): string {
     return texto.charAt(0).toUpperCase() + texto.slice(1);
   }
@@ -96,10 +89,8 @@ export class ClimaPage implements OnInit {
     const total = lista.reduce((acc, d) => acc + d.main.humidity, 0);
     return Math.round(total / lista.length);
   }
+
   verDetalleDia(dia: any) {
-    console.log('Día seleccionado:', dia);
-    
     alert(`Día: ${this.capitalizarPrimera((dia.fecha as Date).toLocaleDateString('es-ES', { weekday: 'long' }))}`);
   }
 }
- 

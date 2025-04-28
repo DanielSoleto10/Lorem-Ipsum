@@ -30,6 +30,10 @@ export const routes: Routes = [
     loadComponent: () => import('./auth/usuarios/agricultor/clima/clima.page').then(m => m.ClimaPage)
   },
   {
+    path: 'usuarios/agricultor/luna',
+    loadComponent: () => import('./auth/usuarios/agricultor/luna/luna.page').then(m => m.LunaPage)
+  },
+  {
     path: '**',
     redirectTo: 'auth/login'
   }
