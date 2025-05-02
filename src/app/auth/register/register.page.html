@@ -33,12 +33,14 @@
                 <ion-input type="password" formControlName="password"></ion-input>
               </ion-item>
 
-              <ion-item>
+              <!-- Cambiado a un select normal HTML en lugar de ion-select -->
+              <ion-item class="custom-select-item">
                 <ion-label position="floating">Rol</ion-label>
-                <ion-select formControlName="rol" placeholder="Selecciona tu rol" interface="popover">
-                  <ion-select-option value="agricultor">Agricultor</ion-select-option>
-                  <ion-select-option value="comprador">Comprador</ion-select-option>
-                </ion-select>
+                <select formControlName="rol" class="custom-select">
+                  <option value="" disabled selected>Selecciona tu rol</option>
+                  <option value="agricultor">Agricultor</option>
+                  <option value="comprador">Comprador</option>
+                </select>
               </ion-item>
 
               <div class="error-msg" *ngIf="errorMessage">

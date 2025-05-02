@@ -85,8 +85,7 @@ ion-item {
   border-radius: 6px;
 }
 
-ion-input,
-ion-select {
+ion-input {
   --padding-start: 12px;
   color: white;
   font-size: 1rem;
@@ -99,8 +98,50 @@ ion-select {
   padding: 10px;
 }
 
-ion-select::part(text) {
+/* Estilos para el select personalizado */
+.custom-select-item {
+  position: relative;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 12px;
   color: white;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 6px;
+  font-size: 1rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.custom-select option {
+  color: white;
+  background-color: #1a1a1a;
+  padding: 10px;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: white;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Añadir flecha desplegable personalizada */
+.custom-select-item::after {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid white;
+  pointer-events: none;
 }
 
 /* BOTÓN REGISTRO */
